@@ -1,25 +1,29 @@
-// Get the necessary elements
-const taskInput = document.getElementById('taskInput');
-const addTaskButton = document.getElementById('addTask');
-const taskList = document.getElementById('taskList');
+//Counter App
 
-// Add event listener for the "Add Task" button
-addTaskButton.addEventListener('click', function() {
-    const taskText = taskInput.value.trim(); // Get and trim the input value
+document.addEventListener("Counter", init);
 
-    // If the input is not empty
-    if (taskText !== '') {
-        const li = document.createElement('li'); // Create a new list item
-        li.textContent = taskText; // Set the task text
-        taskList.appendChild(li); // Add the new task to the list
+let count = Number(sessionStorage.getItem("count")) || 0;
 
-        taskInput.value = ''; // Clear the input field
-    }
-});
+function init() {
+    document.getElementById("count").textContent = count;
+}
 
-// Optional: Add functionality to remove tasks when clicked
-taskList.addEventListener('click', function(e) {
-    if (e.target.tagName === 'LI') {
-        e.target.remove(); // Remove the clicked task
-    }
-});
+function increaseCount() {
+    count++;
+    updateCount();
+}
+
+function decreaseCount() {
+    count--;
+    updateCount();
+}
+
+function resetCount() {
+    count = 0;
+    updateCount();
+}
+
+function updateCount() {
+    document.getElementById("count").textContent = count;
+    sessionStorage.setItem("count", count);
+}
